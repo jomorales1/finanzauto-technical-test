@@ -1,0 +1,1 @@
+# finanzauto-technical-test
