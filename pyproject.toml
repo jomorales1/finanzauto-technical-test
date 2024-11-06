@@ -13,6 +13,7 @@ sqlmodel = "^0.0.22"
 pydantic-settings = "^2.6.1"
 gunicorn = "^23.0.0"
 psycopg2 = "^2.9.10"
+pyjwt = "^2.9.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.7.2"
