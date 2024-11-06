@@ -8,16 +8,11 @@ This project is a RESTful API for managing products, built with FastAPI and SQLM
 ## Implementation decisions
 
 - **Relational database:** For this use case a relational db was selected (postgres) due the nature of the data to be stored. Products are often used in transactional models with relations to entities such as categories, orders, inventory where is important to have data integrity through ACID operations.
+- **Caching:** Caching was implemented for the `GET /v1/products` endpoint using Redis. This helps to reduce the load on the database and improve the response time for fetching the list of products. Cached data is stored with an expiration time to ensure that the data remains fresh.
 
 ## How to Execute the API with Docker
 
-1. **Build the Docker images:**
-
-    ```sh
-    docker-compose build
-    ```
-
-2. **Start the services:**
+1. **Start the services:**
 
     ```sh
     docker-compose up
