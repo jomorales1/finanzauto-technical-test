@@ -5,7 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.utilities.db import create_db_and_tables
-from app.routers.products.products import router as products_router
+from app.routers.auth import auth
+from app.routers.products import products
 
 app = FastAPI(
     title="FastAPI Gunicorn Config",
@@ -26,7 +27,17 @@ app.add_middleware(
 async def root():
     return {"message": "Hello World"}
 
-app.include_router(products_router, tags=["products"], prefix="/api")
+app.include_router(
+    auth.router,
+    tags=["auth"],
+    prefix="/v1/auth"
+)
+
+app.include_router(
+    products.router,
+    tags=["products"],
+    prefix="/v1/products"
+)
 
 def on_starting(server):
     create_db_and_tables()

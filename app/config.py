@@ -3,6 +3,9 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     postgres_uri: str
+    client_id: str
+    client_secret: str
+    jwt_secret_key: str
     root_path: str = ""
     logging_level: str = "INFO"
     testing: bool = False
