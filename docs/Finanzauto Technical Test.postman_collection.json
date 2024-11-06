@@ -75,7 +75,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}:{{port}}/v1/products?page=0&limit=10",
+							"raw": "{{base_url}}:{{port}}/v1/products?page=1&limit=10",
 							"host": [
 								"{{base_url}}"
 							],
@@ -87,7 +87,7 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "0"
+									"value": "1"
 								},
 								{
 									"key": "limit",
@@ -171,7 +171,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Product 3\",\n    \"price\": 25.0,\n    \"quantity\": 1\n}",
+							"raw": "{\n\t\"name\": \"Product 1\",\n    \"price\": 25.0,\n    \"quantity\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
