@@ -15,7 +15,21 @@ services:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
       interval: 5s
       timeout: 5s
-      retries: 3
+      retries: 5
+  cache:
+    image: redis:alpine
+    container_name: cache_container
+    restart: on-failure
+    ports:
+      - '${CACHE_PORT}:6379'
+    command: redis-server
+    volumes:
+      - ./cache:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
   api:
     image: jomorales1/finanzauto-technical-test:1.0.0
     container_name: api_container
@@ -24,9 +38,13 @@ services:
       - ${API_PORT}:8000
     environment:
       POSTGRES_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      REDIS_SERVER: cache
+      REDIS_PORT: 6379
       CLIENT_ID: ${CLIENT_ID}
       CLIENT_SECRET: ${CLIENT_SECRET}
       JWT_SECRET_KEY: ${JWT_SECRET_KEY}
     depends_on:
       db:
+        condition: service_healthy
+      cache:
         condition: service_healthy

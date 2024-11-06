@@ -3,6 +3,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     postgres_uri: str
+    redis_server: str
+    redis_port: int
     client_id: str
     client_secret: str
     jwt_secret_key: str
